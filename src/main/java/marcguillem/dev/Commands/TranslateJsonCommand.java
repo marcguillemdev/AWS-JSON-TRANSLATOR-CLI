@@ -25,7 +25,7 @@ public class TranslateJsonCommand implements Callable<Integer> {
     private String formality;
 
     @Option(
-            names = {"--profanityFilter"},
+            names = {"--enableProfanityFilter"},
             description = "Profanity filter."
     )
     private boolean profanity;
