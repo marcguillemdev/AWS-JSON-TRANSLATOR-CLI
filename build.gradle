@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+}
+
+group 'marcguillem.dev'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-translate
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-translate', version: '1.12.183'
+
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation group: 'org.json', name: 'json', version: '20220320'
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+    implementation 'info.picocli:picocli:4.6.3'
+
+    annotationProcessor 'info.picocli:picocli-codegen:4.6.3'
+}
+
+task uberJar(type: Jar) {
+    manifest {
+        attributes(
+                'Main-Class': 'marcguillem.dev.AwsJsonTranslatorCLI',
+        )
+    }
+    archiveClassifier = 'uber'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from sourceSets.main.output
+
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,20 @@
+[
+    {
+        "nombre": "Aqui debes poner tu nombre y apellidos",
+        "apellidos": {
+            "primerApellido": "Aqui va tu primer apellido",
+            "segundoApellido": "Aqui va tu segundo apellido",
+            "imagenes": [
+                "Primera imagen",
+                "Segunda imagen"
+            ]
+        },
+        "keywords": [
+            "Primer elemento del vector",
+            "Segundo elemento del vector"
+        ],
+        "invalidIntegerValue": 121,
+        "invalidFloatValue": 1.2,
+        "invalidBooleanValue": true
+    }
+]
