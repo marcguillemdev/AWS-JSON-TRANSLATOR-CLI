@@ -2,8 +2,10 @@ package marcguillem.dev.Commands;
 
 import marcguillem.dev.Services.MessageService;
 import marcguillem.dev.Services.TranslatorService;
-import picocli.CommandLine.*;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -29,6 +31,12 @@ public class TranslateJsonCommand implements Callable<Integer> {
             description = "Profanity filter."
     )
     private boolean profanity;
+
+    @Option(
+            names = {"-ct", "--customTerminology"},
+            description = "Name or names of custom terminologies created in Amazon Translate separated by comma. To create your custom terminology visit https://eu-west-3.console.aws.amazon.com/translate/home?region=eu-west-3#terminology"
+    )
+    private String customTerminologies;
 
     @Option(
             names = {"-sl", "--sourceLanguage"},
@@ -74,14 +82,22 @@ public class TranslateJsonCommand implements Callable<Integer> {
 
         MessageService.displayMessage("Profanity filter: ", false);
         MessageService.displayGreenMessage(String.valueOf(this.profanity), true);
+
+        MessageService.displayMessage("Custom terminologies: ", false);
+        if(this.customTerminologies != null && this.customTerminologies.length() > 0) {
+            MessageService.displayGreenMessage(this.customTerminologies, true);
+        } else {
+            MessageService.displayYellowMessage("No custom terminologies provided.", true);
+        }
+        MessageService.displayMessage("", true);
     }
 
     @Override
     public Integer call() throws Exception {
-        if(this.formality == null) {
+        if (this.formality == null) {
             this.formality = "formal";
         }
-        TranslatorService translatorService = new TranslatorService(this.sourceLanguage, this.targetLanguage, formality, profanity);
+        TranslatorService translatorService = new TranslatorService(this.sourceLanguage, this.targetLanguage, formality, profanity, customTerminologies);
         this.displayInfo();
         return translatorService.translateJSON(this.sourceFile, nonInteractive);
     }

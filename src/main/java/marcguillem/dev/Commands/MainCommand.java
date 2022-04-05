@@ -1,7 +1,8 @@
 package marcguillem.dev.Commands;
 
 import marcguillem.dev.Services.MessageService;
-import picocli.CommandLine.*;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
 @Command(
         subcommands = {TranslateJsonCommand.class, SetConfigurationCommand.class},

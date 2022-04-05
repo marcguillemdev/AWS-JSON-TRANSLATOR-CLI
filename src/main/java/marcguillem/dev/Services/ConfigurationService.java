@@ -13,15 +13,15 @@ public class ConfigurationService {
 
     public static Configuration loadConfiguration() throws Exception {
         File file = new File("./config.json");
-        if(file.exists()) {
-            if(isValidJson(Files.readString(file.toPath(), StandardCharsets.UTF_8))) {
+        if (file.exists()) {
+            if (isValidJson(Files.readString(file.toPath(), StandardCharsets.UTF_8))) {
                 JSONObject conf = new JSONObject(Files.readString(file.toPath(), StandardCharsets.US_ASCII));
                 String awsRegionKey = (String) conf.get("region");
                 String awsSecretKey = (String) conf.get("awsSecretAccessKey");
                 String awsAccessKey = (String) conf.get("awsAccessKeyId");
 
-                if(awsAccessKey != null && awsSecretKey != null && awsRegionKey != null) {
-                    if(awsAccessKey.length() > 0 && awsSecretKey.length() > 0 && awsRegionKey.length() > 0) {
+                if (awsAccessKey != null && awsSecretKey != null && awsRegionKey != null) {
+                    if (awsAccessKey.length() > 0 && awsSecretKey.length() > 0 && awsRegionKey.length() > 0) {
                         return new Configuration(awsAccessKey, awsSecretKey, awsRegionKey);
                     }
                 }
@@ -36,17 +36,17 @@ public class ConfigurationService {
     //Method that save awsSecretAccessKey to config.json taking existing config.json as a base
     public static void saveConfiguration(String awsAccessKey, String awsSecretKey, String awsRegionKey) throws Exception {
         File file = new File("./config.json");
-        if(file.exists()) {
+        if (file.exists()) {
             String jsonString = Files.readString(file.toPath(), StandardCharsets.UTF_8);
-            if(isValidJson(jsonString)) {
+            if (isValidJson(jsonString)) {
                 JSONObject conf = new JSONObject(jsonString);
-                if(awsAccessKey != null) {
+                if (awsAccessKey != null) {
                     conf.put("awsAccessKeyId", awsAccessKey);
                 }
-                if(awsSecretKey != null) {
+                if (awsSecretKey != null) {
                     conf.put("awsSecretAccessKey", awsSecretKey);
                 }
-                if(awsRegionKey != null) {
+                if (awsRegionKey != null) {
                     conf.put("region", awsRegionKey);
                 }
                 Files.write(new File("./config.json").toPath(), conf.toString().getBytes());
@@ -61,7 +61,7 @@ public class ConfigurationService {
 
     private static void writeEmptyConfigurationObjectToJson() throws Exception {
         File file = new File("./config.json");
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.createNewFile();
         }
         JSONObject conf = new JSONObject();

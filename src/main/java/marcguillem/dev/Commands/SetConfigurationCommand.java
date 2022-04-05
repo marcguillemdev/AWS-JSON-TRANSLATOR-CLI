@@ -3,9 +3,8 @@ package marcguillem.dev.Commands;
 import marcguillem.dev.Services.ConfigurationService;
 import marcguillem.dev.Services.MessageService;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import picocli.CommandLine.*;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
 import java.util.concurrent.Callable;
 
@@ -45,17 +44,17 @@ public class SetConfigurationCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try {
-            if(awsAccessKey != null) {
+            if (awsAccessKey != null) {
                 ConfigurationService.saveConfiguration(awsAccessKey, null, null);
                 MessageService.displayGreenMessage("AWS Access Key saved!", true);
             }
-            if(awsSecretKey != null) {
+            if (awsSecretKey != null) {
                 ConfigurationService.saveConfiguration(null, awsSecretKey, null);
                 MessageService.displayGreenMessage("AWS Secret Key saved!", true);
             }
 
-            if(awsRegion != null) {
-                if(!isValidRegion(awsRegion)) {
+            if (awsRegion != null) {
+                if (!isValidRegion(awsRegion)) {
                     MessageService.displayRedMessage("AWS Region " + awsRegion + " is not present in the list of valid regions. Please check the AWS documentation. ", true);
                     MessageService.displayYellowMessage("Valid regions are: ", false);
                     MessageService.displayGreenMessage(new JSONArray(regions).toString(), true);
@@ -65,7 +64,7 @@ public class SetConfigurationCommand implements Callable<Integer> {
                 MessageService.displayGreenMessage("AWS Region saved!", true);
             }
 
-            if(awsSecretKey == null && awsAccessKey == null && awsRegion == null) {
+            if (awsSecretKey == null && awsAccessKey == null && awsRegion == null) {
                 MessageService.displayYellowMessage("No options specified, exiting with no changes...", true);
             }
             return 0;

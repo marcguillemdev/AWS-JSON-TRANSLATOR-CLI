@@ -13,6 +13,9 @@
             "Primer elemento del vector",
             "Segundo elemento del vector"
         ],
+        "webTest": {
+            "strong": "Aqui va una frase en <strong>negrita</strong> pero con la terminologia no deberia ser modificada la etiquea <strong>strong</strong>"
+        },
         "invalidIntegerValue": 121,
         "invalidFloatValue": 1.2,
         "invalidBooleanValue": true
