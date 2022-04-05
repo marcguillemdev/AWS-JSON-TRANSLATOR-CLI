@@ -53,6 +53,9 @@ java -jar aws-json-translator.jar set-configuration --awsAccessKey exampleAccess
     - `-sf` or `--sourceFile`.  **_REQUIRED._** Source file containing JSON to translate.
     - `--enableProfanityFilter`. **_OPTIONAL._** Enable profanity filter. **(Empty parameter)**
     - `--formality`. **_OPTIONAL._** Formality level. Possible values: formal, informal. Default: formal
+    - `--customTerminology`. **_OPTIONAL._** Custom terminology name list separated by **comma**.
+
+_To use custom terminology, you have to create a custom terminology in Amazon Translate and then put the name in `--customTerminology` parameter. For more information, see [Amazon Translate Custom Terminology](https://eu-west-3.console.aws.amazon.com/translate/home?region=eu-west-3#terminology)._
 
 ### Basic usage of `"translate-json"`
 
@@ -67,18 +70,22 @@ java -jar aws-json-translator.jar set-configuration --awsAccessKey exampleAccess
 java -jar aws-json-translator.jar translate-json -sf example.json -sl es -tl en
 ```
 
+_This command will translate the file `example.json` from Spanish to English_
+
 ### Extended usage of `"translate-json"`
 
 ---
 #### Run .exe
  ```properties
-.\aws-json-translator.exe translate-json --sourceFile example.json --sourceLanguage es --targetLanguage en --formality formal --enableProfanityFilter
+.\aws-json-translator.exe translate-json --sourceFile example.json --sourceLanguage es --targetLanguage en --formality formal --enableProfanityFilter --customTerminology list1,list2
 ```
 
 #### Run .jar
  ```properties
-java -jar aws-json-translator.jar translate-json --sourceFile example.json --sourceLanguage es --targetLanguage en --formality formal --enableProfanityFilter
+java -jar aws-json-translator.jar translate-json --sourceFile example.json --sourceLanguage es --targetLanguage en --formality formal --enableProfanityFilter --customTerminology list1,list2
 ```
+
+_This command will translate the file `example.json` from Spanish to English with formality `formal`, with enabled `profanity filter` and a list of custom terminologies_
 
 3. **Done!** Your translated JSON is on _`.\output`_ folder with the target language code as name.
 
