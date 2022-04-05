@@ -5,7 +5,6 @@ import picocli.CommandLine;
 
 public class AwsJsonTranslatorCLI {
     public static void main(String[] args) {
-        doTranslate();
         System.exit(new CommandLine(new MainCommand()).execute(args));
     }
 
