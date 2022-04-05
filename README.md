@@ -1,5 +1,5 @@
 
-# ![cli icon](https://marcguillem.dev/img/cli.png) AWS JSON TRANSLATOR CLI
+# ![cli icon](https://repository-images.githubusercontent.com/476297150/9d825860-db0b-4a8f-9c53-75ab6fd312fa) AWS JSON TRANSLATOR CLI
 **AWS JSON TRANSLATOR CLI** is a command line application to **translate JSON files using AWS Translate**.
 
 # Table of contents
